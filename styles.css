@@ -1,0 +1,431 @@
+/* Сброс стилей и основные настройки */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #000000ef;
+    color: #333;
+}
+
+/* Контейнер приложения */
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Стили заголовка */
+.app-header {
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+.app-header h1 {
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #7f8c8d;
+    font-size: 1.1rem;
+}
+
+/* Секция ввода новой заметки */
+.note-input-section {
+    margin-bottom: 30px;
+}
+
+.note-input-container {
+    background: #101010;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#note-title {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    font-size: 1.1rem;
+}
+
+#note-content {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: vertical;
+    font-size: 1rem;
+}
+
+/* Секция поиска и фильтрации */
+.search-section {
+    margin-bottom: 30px;
+}
+
+.search-container {
+    display: flex;
+    gap: 10px;
+}
+
+#search-notes {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+#sort-notes {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+}
+
+/* Контейнер для заметок */
+.notes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Карточка заметки */
+.note-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.note-card:hover {
+    transform: translateY(-5px);
+}
+
+.note-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.note-title {
+    font-size: 1.2rem;
+    color: #2c3e50;
+}
+
+.note-date {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+.note-text {
+    margin-bottom: 15px;
+    color: #34495e;
+}
+
+.note-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Кнопки */
+.btn-primary {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+}
+
+.btn-edit, .btn-delete {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-edit {
+    background-color: #f1c40f;
+    color: white;
+}
+
+.btn-delete {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btn-edit:hover {
+    background-color: #f39c12;
+}
+
+.btn-delete:hover {
+    background-color: #c0392b;
+}
+
+/* Медиа-запросы для адаптивности */
+
+/* Для экранов меньше 1200px */
+@media (max-width: 1200px) {
+    .app-container {
+        padding: 15px;
+    }
+
+    .app-header h1 {
+        font-size: 2.2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .note-input-container {
+        padding: 15px;
+    }
+
+    #note-title, #note-content {
+        font-size: 1rem;
+    }
+
+    .notes-container {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+/* Для экранов меньше 992px */
+@media (max-width: 992px) {
+    .app-container {
+        padding: 10px;
+    }
+
+    .app-header h1 {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+    }
+
+    .note-input-container {
+        padding: 10px;
+    }
+
+    #note-title, #note-content {
+        font-size: 0.9rem;
+    }
+
+    .notes-container {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    .note-card {
+        padding: 15px;
+    }
+
+    .note-title {
+        font-size: 1.1rem;
+    }
+
+    .note-date {
+        font-size: 0.8rem;
+    }
+
+    .note-text {
+        font-size: 0.9rem;
+    }
+
+    .btn-primary {
+        padding: 8px 16px;
+    }
+
+    .btn-edit, .btn-delete {
+        padding: 4px 8px;
+    }
+}
+
+/* Для экранов меньше 768px */
+@media (max-width: 768px) {
+    .app-container {
+        padding: 10px;
+    }
+
+    .notes-container {
+        grid-template-columns: 1fr;
+    }
+
+    .search-container {
+        flex-direction: column;
+    }
+
+    .app-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .subtitle {
+        font-size: 0.8rem;
+    }
+
+    .note-input-container {
+        padding: 10px;
+    }
+
+    #note-title, #note-content {
+        font-size: 0.8rem;
+    }
+
+    .note-card {
+        padding: 10px;
+    }
+
+    .note-title {
+        font-size: 1rem;
+    }
+
+    .note-date {
+        font-size: 0.7rem;
+    }
+
+    .note-text {
+        font-size: 0.8rem;
+    }
+
+    .btn-primary {
+        padding: 6px 12px;
+    }
+
+    .btn-edit, .btn-delete {
+        padding: 3px 6px;
+    }
+}
+
+/* Для экранов меньше 576px */
+@media (max-width: 576px) {
+    .app-container {
+        padding: 5px;
+    }
+
+    .app-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .subtitle {
+        font-size: 0.7rem;
+    }
+
+    .note-input-container {
+        padding: 5px;
+    }
+
+    #note-title, #note-content {
+        font-size: 0.7rem;
+    }
+
+    .note-card {
+        padding: 5px;
+    }
+
+    .note-title {
+        font-size: 0.9rem;
+    }
+
+    .note-date {
+        font-size: 0.6rem;
+    }
+
+    .note-text {
+        font-size: 0.7rem;
+    }
+
+    .btn-primary {
+        padding: 5px 10px;
+    }
+
+    .btn-edit, .btn-delete {
+        padding: 2px 4px;
+    }
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.note-card {
+    animation: fadeIn 0.3s ease-out;
+}
+
+.app-header h1 {
+    display: flex; /* Используем flexbox для выравнивания */
+    align-items: center; /* Выравниваем элементы по вертикали */
+}
+
+.app-header h1 .note-icon {
+    width: 48px; /* Ширина картинки */
+    height: 48px; /* Высота картинки */
+    margin-right: 10px; /* Отступ между картинкой и текстом */
+}
+
+/* Стили для шапки */
+.app-header {
+    position: relative; /* Делаем шапку относительной для позиционирования кнопки */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+/* Стили для кнопки добавления заметки */
+.add-note-button {
+    position: absolute; /* Абсолютное позиционирование */
+    top: 0; /* Вверху */
+    right: 0; /* Справа */
+    background: none; /* Убираем фон */
+    border: none; /* Убираем границу */
+    cursor: pointer; /* Курсор в виде указателя */
+    padding: 10px; /* Отступы */
+}
+
+.add-note-button .add-icon {
+    width: 30px; /* Ширина иконки */
+    height: 30px; /* Высота иконки */
+    transition: transform 0.2s ease; /* Анимация при наведении */
+}
+
+.add-note-button:hover .add-icon {
+    transform: scale(1.1); /* Увеличиваем иконку при наведении */
+}
+
+/* Скрытие области ввода заметок */
+.hidden {
+    display: none;
+}
+
+#note-title, #note-content {
+    font-family: 'B612', sans-serif;
+}
