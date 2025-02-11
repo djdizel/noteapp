@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function displayNote (note) {
         const noteCard = document.createElement('div');
         noteCard.className = 'note-card';
+        noteCard.dataset.id = note.id; // Добавляем ID заметки в атрибут данных
         noteCard.innerHTML = `
             <div class="note-header">
                 <h3 class="note-title">${note.title}</h3>
@@ -69,6 +70,21 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
         `;
         notesContainer.appendChild(noteCard);
+
+        // Добавляем обработчик для кнопки удаления
+        const deleteButton = noteCard.querySelector('.btn-delete');
+        deleteButton.addEventListener('click', async function () {
+            const noteId = noteCard.dataset.id;
+            const response = await fetch(`/delete_note/${noteId}`, {
+                method: 'DELETE'
+            });
+
+            if (response.ok) {
+                noteCard.remove();
+            } else {
+                console.error('Failed to delete note');
+            }
+        });
     }
 
     fetchNotes();
