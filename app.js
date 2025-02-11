@@ -5,12 +5,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const noteTitle = document.getElementById('note-title');
     const noteContent = document.getElementById('note-content');
     const notesContainer = document.querySelector('.notes-container');
+    let editMode = false;
+    let editNoteId = null;
 
     addNoteButton.addEventListener('click', function () {
         if (noteInputSection.classList.contains('hidden')) {
             noteInputSection.classList.remove('hidden');
         } else {
             noteInputSection.classList.add('hidden');
+            resetForm();
         }
     });
 
@@ -21,22 +24,38 @@ document.addEventListener('DOMContentLoaded', function () {
             date: new Date().toLocaleDateString()
         };
 
-        const response = await fetch('/add_note', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(note)
-        });
+        if (editMode) {
+            const response = await fetch(`/edit_note/${editNoteId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(note)
+            });
 
-        if (response.ok) {
-            const newNote = await response.json();
-            displayNote(newNote);
-            noteTitle.value = '';
-            noteContent.value = '';
-            noteInputSection.classList.add('hidden');
+            if (response.ok) {
+                const updatedNote = await response.json();
+                updateNoteElement(updatedNote);
+                resetForm();
+            } else {
+                console.error('Failed to edit note');
+            }
         } else {
-            console.error('Failed to add note');
+            const response = await fetch('/add_note', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(note)
+            });
+
+            if (response.ok) {
+                const newNote = await response.json();
+                displayNote(newNote);
+                resetForm();
+            } else {
+                console.error('Failed to add note');
+            }
         }
     });
 
@@ -85,6 +104,31 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Failed to delete note');
             }
         });
+
+        // Добавляем обработчик для кнопки редактирования
+        const editButton = noteCard.querySelector('.btn-edit');
+        editButton.addEventListener('click', function () {
+            editMode = true;
+            editNoteId = noteCard.dataset.id;
+            noteTitle.value = note.title;
+            noteContent.value = note.content;
+            noteInputSection.classList.remove('hidden');
+        });
+    }
+
+    function updateNoteElement (note) {
+        const noteCard = document.querySelector(`.note-card[data-id='${note.id}']`);
+        noteCard.querySelector('.note-title').textContent = note.title;
+        noteCard.querySelector('.note-text').textContent = note.content;
+        noteCard.querySelector('.note-date').textContent = note.date;
+    }
+
+    function resetForm () {
+        noteTitle.value = '';
+        noteContent.value = '';
+        editMode = false;
+        editNoteId = null;
+        noteInputSection.classList.add('hidden');
     }
 
     fetchNotes();

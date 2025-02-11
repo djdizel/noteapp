@@ -43,5 +43,19 @@ def delete_note(id):
     else:
         return jsonify({"error": "Note not found"}), 
 
+@app.route('/edit_note/<int:id>', methods=['PUT'])
+def edit_note(id):
+    data = request.get_json()
+    title = data['title']
+    content = data['content']
+    cursor.execute("UPDATE notes SET title = %s, content = %s, date = %s WHERE id = %s RETURNING *", 
+                   (title, content, datetime.datetime.now(), id))
+    updated_note = cursor.fetchone()
+    conn.commit()
+    if updated_note:
+        return jsonify(updated_note), 200
+    else:
+        return jsonify({"error": "Note not found"}), 404
+
 if __name__ == '__main__':
     app.run(debug=True)

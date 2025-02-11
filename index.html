@@ -27,7 +27,7 @@
         </header>
 
         <!-- Секция для добавления новой заметки -->
-        <section class="note-input-section" id="note-input-section">
+        <section class="note-input-section hidden" id="note-input-section">
             <div class="note-input-container">
                 <input type="text" id="note-title" placeholder="Заголовок заметки">
                 <textarea id="note-content" placeholder="Текст заметки"></textarea>
@@ -53,22 +53,7 @@
 
         <!-- Секция для отображения заметок -->
         <section class="notes-container">
-            <!-- Пример заметки (будет генерироваться JavaScript'ом) -->
-            <div class="note-card">
-                <div class="note-header">
-                    <h3 class="note-title">Пример заметки</h3>
-                    <span class="note-date">11.02.2025</span>
-                </div>
-                <p class="note-text">Это пример того, как будет выглядеть заметка в вашем приложении.</p>
-                <div class="note-footer">
-                    <button class="btn-edit" title="Редактировать">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                    <button class="btn-delete" title="Удалить">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-            </div>
+            
         </section>
     </div>
     <script src="app.js"></script>
